@@ -1,6 +1,6 @@
 # Cadastro de funcionarios de uma padaria
 
-##Requisitos Funcionais
+## Requisitos Funcionais
 Fazer login no sistema mediantes a digitação do nome do usuário e da senha (todos os usuários);
 Permitir que o usuário se cadastre caso ele não esteja cadastrado para acessar o sistema (todos os usuários - usuário, senha, cargo);
 Exibir mensagem de erro caso o usuário e senha estejam incorretos (todos os usuários).
