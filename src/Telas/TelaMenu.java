@@ -45,9 +45,10 @@ public class TelaMenu extends javax.swing.JFrame {
         txtCategoria = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         txtCodigo = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         lblIcon1 = new javax.swing.JLabel();
         lblSaudacao = new javax.swing.JLabel();
         lblIcon = new javax.swing.JLabel();
@@ -182,21 +183,6 @@ public class TelaMenu extends javax.swing.JFrame {
         pnlCadastrarProdutos.add(txtCodigo);
         txtCodigo.setBounds(120, 40, 210, 40);
 
-        btnBuscar.setBackground(new java.awt.Color(4, 211, 97));
-        btnBuscar.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        btnBuscar.setForeground(new java.awt.Color(0, 0, 0));
-        btnBuscar.setText("Buscar");
-        btnBuscar.setActionCommand("");
-        btnBuscar.setBorder(null);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        pnlCadastrarProdutos.add(btnBuscar);
-        btnBuscar.setBounds(360, 40, 192, 50);
-
         btnSalvar.setBackground(new java.awt.Color(4, 211, 97));
         btnSalvar.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         btnSalvar.setForeground(new java.awt.Color(0, 0, 0));
@@ -224,11 +210,39 @@ public class TelaMenu extends javax.swing.JFrame {
             }
         });
         pnlCadastrarProdutos.add(btnExcluir);
-        btnExcluir.setBounds(360, 40, 192, 50);
+        btnExcluir.setBounds(250, 310, 192, 50);
+
+        btnAlterar.setBackground(new java.awt.Color(4, 211, 97));
+        btnAlterar.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        btnAlterar.setForeground(new java.awt.Color(0, 0, 0));
+        btnAlterar.setText("Alterar");
+        btnAlterar.setBorder(null);
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
+        pnlCadastrarProdutos.add(btnAlterar);
+        btnAlterar.setBounds(470, 310, 190, 50);
+
+        btnBuscar.setBackground(new java.awt.Color(4, 211, 97));
+        btnBuscar.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        btnBuscar.setText("Buscar");
+        btnBuscar.setActionCommand("");
+        btnBuscar.setBorder(null);
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        pnlCadastrarProdutos.add(btnBuscar);
+        btnBuscar.setBounds(360, 40, 192, 50);
 
         lblIcon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/1024px-Black_flag.svg.png"))); // NOI18N
         pnlCadastrarProdutos.add(lblIcon1);
-        lblIcon1.setBounds(-50, -50, 1140, 580);
+        lblIcon1.setBounds(-50, -40, 1140, 580);
 
         getContentPane().add(pnlCadastrarProdutos);
         pnlCadastrarProdutos.setBounds(0, 0, 700, 420);
@@ -339,7 +353,11 @@ public class TelaMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void imtAlterarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imtAlterarProdutosActionPerformed
-        // TODO add your handling code here:
+        pnlCadastrarProdutos.setVisible(true);
+        btnBuscar.setVisible(true);
+        btnExcluir.setVisible(false);
+        btnSalvar.setVisible(false);        
+        btnAlterar.setVisible(false);
     }//GEN-LAST:event_imtAlterarProdutosActionPerformed
 
     private void itmCadastrarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmCadastrarFuncionariosActionPerformed
@@ -359,9 +377,8 @@ public class TelaMenu extends javax.swing.JFrame {
         pnlCadastrarProdutos.setVisible(true);
         btnBuscar.setVisible(false);
         btnExcluir.setVisible(false);
-        btnSalvar.setVisible(true);
-        
-
+        btnSalvar.setVisible(true);        
+        btnAlterar.setVisible(false);
     }//GEN-LAST:event_itmCadastrarProdutosActionPerformed
 
     private void txtPrecoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPrecoFocusGained
@@ -421,6 +438,9 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+
+        
         if (txtCodigo.getText().equals("")){ 
             JOptionPane.showMessageDialog(null, "Preencha o código do produto");
             txtCodigo.requestFocus();
@@ -439,6 +459,8 @@ public class TelaMenu extends javax.swing.JFrame {
                 txtNome.setText(resultado.getString("nome"));
                 txtCategoria.setText(resultado.getString("categoria"));
                 txtPreco.setText(resultado.getString("preco"));
+                btnExcluir.setVisible(true);
+                btnAlterar.setVisible(true);
             } else { 
                 JOptionPane.showMessageDialog(null, "Produto não encontrado");
                 txtCodigo.requestFocus();
@@ -454,7 +476,7 @@ public class TelaMenu extends javax.swing.JFrame {
                 }
 
         }
-
+     
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -498,6 +520,8 @@ public class TelaMenu extends javax.swing.JFrame {
         btnSalvar.setVisible(false);
         btnExcluir.setVisible(false);
         btnBuscar.setVisible(true);
+        btnAlterar.setVisible(false);
+
     }//GEN-LAST:event_itmRelatoriosProdutosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -515,6 +539,8 @@ public class TelaMenu extends javax.swing.JFrame {
             txtCategoria.setText("");
             txtPreco.setText("");
             txtCodigo.requestFocus();
+            btnExcluir.setVisible(false);
+            btnAlterar.setVisible(false);
         } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(btnBuscar, "Erro entre em contato com o administrador");
                     
@@ -533,9 +559,42 @@ public class TelaMenu extends javax.swing.JFrame {
     private void itmExcluirProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmExcluirProdutosActionPerformed
         pnlCadastrarProdutos.setVisible(true);
         btnSalvar.setVisible(false);
-        btnBuscar.setVisible(false);
-        btnExcluir.setVisible(true);
+        btnBuscar.setVisible(true);
+        btnExcluir.setVisible(false);        
+        btnAlterar.setVisible(false);
+
     }//GEN-LAST:event_itmExcluirProdutosActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        Connection conexao;
+        PreparedStatement st;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/bancoPadaria", "root", "b9310u54");
+            st = conexao.prepareStatement("UPDATE produtos SET nome = ?, categoria = ?, preco = ? WHERE codigo = ? ");
+            st.setString(1, txtNome.getText());            
+            st.setString(2, txtCategoria.getText());            
+            st.setString(3, txtPreco.getText());            
+            st.setString(4, txtCodigo.getText());
+
+            st.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Produto alterado com sucesso!");
+            txtCodigo.setText("");
+            txtNome.setText("");
+            txtCategoria.setText("");
+            txtPreco.setText("");
+            txtCodigo.requestFocus();
+            btnExcluir.setVisible(false);
+            btnAlterar.setVisible(false);
+        } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(btnBuscar, "Erro entre em contato com o administrador");
+                    
+
+        } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(btnBuscar, "Erro número " + ex.getMessage() + "entre em contato com o administrador e informe o número do erro");
+                
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -582,6 +641,7 @@ public class TelaMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMenu;
+    private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
